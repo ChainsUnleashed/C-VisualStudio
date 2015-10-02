@@ -1,0 +1,40 @@
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+
+namespace SystemInfo
+{
+    class Program
+    {
+            // setting a constant int for padding
+        private const int DFAULT_PADDING = 35;
+
+        static void Main(string[] args)
+        {
+            //print report number
+            Console.WriteLine(" System Information");
+            Console.WriteLine(" ===================================\n");
+
+            //switch console color 
+            Console.ForegroundColor = ConsoleColor.DarkCyan;
+        
+
+            // Output system information
+
+            Console.WriteLine(" Machine Name:" .PadRight(DFAULT_PADDING) + Environment.MachineName);
+            Console.WriteLine(" Enviroment Name:" .PadRight(DFAULT_PADDING) + Environment.MachineName);
+            Console.WriteLine(" Processor Count:".PadRight(DFAULT_PADDING) + Environment.ProcessorCount);
+            Console.WriteLine(" Is 64Bit:".PadRight(DFAULT_PADDING) + Environment.Is64BitOperatingSystem);
+            Console.WriteLine(" CLR Version:".PadRight(DFAULT_PADDING) + Environment.Version);
+            Console.WriteLine(" OS Version".PadRight(DFAULT_PADDING) + Environment.OSVersion);
+            Console.ResetColor();
+            Console.Read();
+
+              
+
+
+        }
+    }
+}
