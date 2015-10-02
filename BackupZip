@@ -1,0 +1,44 @@
+using System;
+using System.Collections.Generic;
+using System.IO;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+
+namespace BackupZip
+{
+    class Program
+    {
+        static void Main(string[] args)
+        {
+            var srcfolder = "Important";
+            var bckfolder = "backup";
+
+            CreateZipBackup(srcfolder, bckfolder, "otherfolder");
+
+                Console.Read();
+        }
+
+        private static void CreateZipBackup (string foldertoBckUP, string desfolder, string fileName = "bckzip")
+        {
+            if (!Directory.Exists(foldertoBckUP)) throw new DirectoryNotFoundException(foldertoBckUP + " does not exist.");
+            if (!Directory.Exists(desfolder)) Directory.CreateDirectory(desfolder);
+
+            var backupZipName = fileName + DateTime.Now.ToString("yy-MM-dd-hh-mm-ss") + ".zip";
+            var backupLocal = Path.Combine(desfolder, backupZipName);
+
+            using (FileStream zip2Open = File.Open(backupLocal, FileMode.Create))
+            {
+                using (ZipArchive archive = new ZipArchive(zip2Open, ZipArchiveMode.Update))
+
+                {
+                    foreach (var file in Directory.EnumerateFiles(foldertoBckUP))
+                    {
+                        archive.CreateentryfromFile(file, Path.GetFileName(file));
+                    }
+                }
+              
+            }
+        }
+    }
+}
